@@ -28,15 +28,3 @@ time.sleep(5)
 
 dic_orcamentos = {'setor': [], 'valor_previsto': [], 'valor_realizado': [], 'mes': [], 'ano': []}
 
-while True:
-    try:
-        WebDriverWait(driver, 10).until(
-            ec.presence_of_all_elements_located(By.TAG_NAME, 'tr')
-        )
-        print('Elementos encontrados com sucesso!')
-
-    except:
-
-
-
-    break
