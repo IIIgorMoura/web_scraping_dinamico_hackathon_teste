@@ -59,5 +59,5 @@ for i in lista_orcamentos:
 driver.quit()
 
 df = pd.DataFrame(dic_orcamentos)
-df.to_excel('webscraping_orcamentos.xlsx')
+df.to_excel('webscraping_orcamentos.xlsx', index=False)
 print(f"Arquivo foi salvo com sucesso {len(df)}")
