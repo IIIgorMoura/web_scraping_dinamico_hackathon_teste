@@ -28,3 +28,36 @@ time.sleep(5)
 
 dic_orcamentos = {'setor': [], 'valor_previsto': [], 'valor_realizado': [], 'mes': [], 'ano': []}
 
+try:
+    WebDriverWait(driver, 10).until(
+        ec.presence_of_all_elements_located((By.ID, 'Table'))
+    )
+except TimeoutException:
+    print('>>> TEMPO EXCEDIDO! <<<')
+
+lista_orcamentos = driver.find_elements(By.TAG_NAME, 'tr')
+
+for i in lista_orcamentos:
+    try:
+        setor = i.find_element(By.CLASS_NAME, 'td_setor').text.strip()
+        valor_previsto = i.find_element(By.CLASS_NAME, 'td_valor_previsto').text.strip()
+        valor_realizado = i.find_element(By.CLASS_NAME, 'td_valor_realizado').text.strip()
+        mes = i.find_element(By.CLASS_NAME, 'td_mes').text.strip()
+        ano = i.find_element(By.CLASS_NAME, 'td_ano').text.strip()
+
+        dic_orcamentos['setor'].append(setor)
+        dic_orcamentos['valor_previsto'].append(valor_previsto)
+        dic_orcamentos['valor_realizado'].append(valor_realizado)
+        dic_orcamentos['mes'].append(mes)
+        dic_orcamentos['ano'].append(ano)
+
+        print(f'{setor} - {valor_realizado}')
+
+    except Exception as e:
+        print('Não foi possível coletar dados: ', e)
+
+driver.quit()
+
+df = pd.DataFrame(dic_orcamentos)
+df.to_excel('webscraping_orcamentos.xlsx')
+print(f"Arquivo foi salvo com sucesso {len(df)}")
