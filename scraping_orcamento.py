@@ -1,3 +1,5 @@
+# ATENÇÃO >>> TROCAR A 'ABA' DA PÁGINA WEBSITE
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
@@ -24,5 +26,17 @@ driver.get(url_base)
 
 time.sleep(5)
 
-# armazém ITENS
-dic_ = {'column1':[], 'column2':[]}
+dic_orcamentos = {'setor': [], 'valor_previsto': [], 'valor_realizado': [], 'mes': [], 'ano': []}
+
+while True:
+    try:
+        WebDriverWait(driver, 10).until(
+            ec.presence_of_all_elements_located(By.TAG_NAME, 'tr')
+        )
+        print('Elementos encontrados com sucesso!')
+
+    except:
+
+
+
+    break
